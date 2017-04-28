@@ -1,0 +1,490 @@
+%%% ====================================================================
+%%%  BibTeX-file{
+%%%     author          = "Gerry Murray",
+%%%     version         = "1.2",
+%%%     date            = "2 April 2012",
+%%%     filename        = "acmsmall-sample-bibfile.bib",
+%%%     address         = "ACM, NY",
+%%%     email           = "murray at hq.acm.org",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "ACM Reference Format, bibliography, citation, references",
+%%%     supported       = "yes",
+%%%     docstring       = "This BibTeX database file contains 'bibdata' entries
+%%%                        that 'match' the examples provided in the Specifications Document
+%%%                        AND, also, 'legacy'-type bibs. It should assist authors in 
+%%%                        choosing the 'correct' at-bibtype and necessary bib-fields
+%%%                        so as to obtain the appropriate ACM Reference Format output. 
+%%%			   It also contains many 'Standard Abbreviations'. "
+%%%  }
+%%% ====================================================================
+
+% Journals
+
+% First the Full Name is given, then the abbreviation used in the AMS Math
+% Reviews, with an indication if it could not be found there.
+% Note the 2nd overwrites the 1st, so swap them if you want the full name.
+
+ %{AMS}
+ @String{AMSTrans = "American Mathematical Society Translations" }
+ @String{AMSTrans = "Amer. Math. Soc. Transl." }
+ @String{BullAMS = "Bulletin of the American Mathematical Society" }
+ @String{BullAMS = "Bull. Amer. Math. Soc." }
+ @String{ProcAMS = "Proceedings of the American Mathematical Society" }
+ @String{ProcAMS = "Proc. Amer. Math. Soc." }
+ @String{TransAMS = "Transactions of the American Mathematical Society" }
+ @String{TransAMS = "Trans. Amer. Math. Soc." }
+
+ %ACM
+ @String{CACM = "Communications of the {ACM}" }
+ @String{CACM = "Commun. {ACM}" }
+ @String{CompServ = "Comput. Surveys" }
+ @String{JACM = "J. ACM" }
+ @String{ACMMathSoft = "{ACM} Transactions on Mathematical Software" }
+ @String{ACMMathSoft = "{ACM} Trans. Math. Software" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newsletter" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newslett." }
+
+ @String{AmerSocio = "American Journal of Sociology" }
+ @String{AmerStatAssoc = "Journal of the American Statistical Association" }
+ @String{AmerStatAssoc = "J. Amer. Statist. Assoc." }
+ @String{ApplMathComp = "Applied Mathematics and Computation" }
+ @String{ApplMathComp = "Appl. Math. Comput." }
+ @String{AmerMathMonthly = "American Mathematical Monthly" }
+ @String{AmerMathMonthly = "Amer. Math. Monthly" }
+ @String{BIT = "{BIT}" }
+ @String{BritStatPsych = "British Journal of Mathematical and Statistical
+          Psychology" }
+ @String{BritStatPsych = "Brit. J. Math. Statist. Psych." }
+ @String{CanMathBull = "Canadian Mathematical Bulletin" }
+ @String{CanMathBull = "Canad. Math. Bull." }
+ @String{CompApplMath = "Journal of Computational and Applied Mathematics" }
+ @String{CompApplMath = "J. Comput. Appl. Math." }
+ @String{CompPhys = "Journal of Computational Physics" }
+ @String{CompPhys = "J. Comput. Phys." }
+ @String{CompStruct = "Computers and Structures" }
+ @String{CompStruct = "Comput. \& Structures" }
+ @String{CompJour = "The Computer Journal" }
+ @String{CompJour = "Comput. J." }
+ @String{CompSysSci = "Journal of Computer and System Sciences" }
+ @String{CompSysSci = "J. Comput. System Sci." }
+ @String{Computing = "Computing" }
+ @String{ContempMath = "Contemporary Mathematics" }
+ @String{ContempMath = "Contemp. Math." }
+ @String{Crelle = "Crelle's Journal" }
+ @String{GiornaleMath = "Giornale di Mathematiche" }
+ @String{GiornaleMath = "Giorn. Mat." } % didn't find in AMS MR., ibid.
+
+ %IEEE
+ @String{Computer = "{IEEE} Computer" }
+ @String{IEEETransComp = "{IEEE} Transactions on Computers" }
+ @String{IEEETransComp = "{IEEE} Trans. Comput." }
+ @String{IEEETransAC = "{IEEE} Transactions on Automatic Control" }
+ @String{IEEETransAC = "{IEEE} Trans. Automat. Control" }
+ @String{IEEESpec = "{IEEE} Spectrum" } % didn't find in AMS MR
+ @String{ProcIEEE = "Proceedings of the {IEEE}" }
+ @String{ProcIEEE = "Proc. {IEEE}" } % didn't find in AMS MR
+ @String{IEEETransAeroElec = "{IEEE} Transactions on Aerospace and Electronic
+     Systems" }
+ @String{IEEETransAeroElec = "{IEEE} Trans. Aerospace Electron. Systems" }
+
+ @String{IMANumerAna = "{IMA} Journal of Numerical Analysis" }
+ @String{IMANumerAna = "{IMA} J. Numer. Anal." }
+ @String{InfProcLet = "Information Processing Letters" }
+ @String{InfProcLet = "Inform. Process. Lett." }
+ @String{InstMathApp = "Journal of the Institute of Mathematics and
+     its Applications" }
+ @String{InstMathApp = "J. Inst. Math. Appl." }
+ @String{IntControl = "International Journal of Control" }
+ @String{IntControl = "Internat. J. Control" }
+ @String{IntNumerEng = "International Journal for Numerical Methods in
+     Engineering" }
+ @String{IntNumerEng = "Internat. J. Numer. Methods Engrg." }
+ @String{IntSuper = "International Journal of Supercomputing Applications" }
+ @String{IntSuper = "Internat. J. Supercomputing Applic." } % didn't find
+%% in AMS MR
+ @String{Kibernetika = "Kibernetika" }
+ @String{JResNatBurStand = "Journal of Research of the National Bureau
+     of Standards" }
+ @String{JResNatBurStand = "J. Res. Nat. Bur. Standards" }
+ @String{LinAlgApp = "Linear Algebra and its Applications" }
+ @String{LinAlgApp = "Linear Algebra Appl." }
+ @String{MathAnaAppl = "Journal of Mathematical Analysis and Applications" }
+ @String{MathAnaAppl = "J. Math. Anal. Appl." }
+ @String{MathAnnalen = "Mathematische Annalen" }
+ @String{MathAnnalen = "Math. Ann." }
+ @String{MathPhys = "Journal of Mathematical Physics" }
+ @String{MathPhys = "J. Math. Phys." }
+ @String{MathComp = "Mathematics of Computation" }
+ @String{MathComp = "Math. Comp." }
+ @String{MathScand = "Mathematica Scandinavica" }
+ @String{MathScand = "Math. Scand." }
+ @String{TablesAidsComp = "Mathematical Tables and Other Aids to Computation" }
+ @String{TablesAidsComp = "Math. Tables Aids Comput." }
+ @String{NumerMath = "Numerische Mathematik" }
+ @String{NumerMath = "Numer. Math." }
+ @String{PacificMath = "Pacific Journal of Mathematics" }
+ @String{PacificMath = "Pacific J. Math." }
+ @String{ParDistComp = "Journal of Parallel and Distributed Computing" }
+ @String{ParDistComp = "J. Parallel and Distrib. Comput." } % didn't find
+%% in AMS MR
+ @String{ParComputing = "Parallel Computing" }
+ @String{ParComputing = "Parallel Comput." }
+ @String{PhilMag = "Philosophical Magazine" }
+ @String{PhilMag = "Philos. Mag." }
+ @String{ProcNAS = "Proceedings of the National Academy of Sciences
+                    of the USA" }
+ @String{ProcNAS = "Proc. Nat. Acad. Sci. U. S. A." }
+ @String{Psychometrika = "Psychometrika" }
+ @String{QuartMath = "Quarterly Journal of Mathematics, Oxford, Series (2)" }
+ @String{QuartMath = "Quart. J. Math. Oxford Ser. (2)" }
+ @String{QuartApplMath = "Quarterly of Applied Mathematics" }
+ @String{QuartApplMath = "Quart. Appl. Math." }
+ @String{RevueInstStat = "Review of the International Statisical Institute" }
+ @String{RevueInstStat = "Rev. Inst. Internat. Statist." }
+
+ %SIAM
+ @String{JSIAM = "Journal of the Society for Industrial and Applied
+     Mathematics" }
+ @String{JSIAM = "J. Soc. Indust. Appl. Math." }
+ @String{JSIAMB = "Journal of the Society for Industrial and Applied
+     Mathematics, Series B, Numerical Analysis" }
+ @String{JSIAMB = "J. Soc. Indust. Appl. Math. Ser. B Numer. Anal." }
+ @String{SIAMAlgMeth = "{SIAM} Journal on Algebraic and Discrete Methods" }
+ @String{SIAMAlgMeth = "{SIAM} J. Algebraic Discrete Methods" }
+ @String{SIAMAppMath = "{SIAM} Journal on Applied Mathematics" }
+ @String{SIAMAppMath = "{SIAM} J. Appl. Math." }
+ @String{SIAMComp = "{SIAM} Journal on Computing" }
+ @String{SIAMComp = "{SIAM} J. Comput." }
+ @String{SIAMMatrix = "{SIAM} Journal on Matrix Analysis and Applications" }
+ @String{SIAMMatrix = "{SIAM} J. Matrix Anal. Appl." }
+ @String{SIAMNumAnal = "{SIAM} Journal on Numerical Analysis" }
+ @String{SIAMNumAnal = "{SIAM} J. Numer. Anal." }
+ @String{SIAMReview = "{SIAM} Review" }
+ @String{SIAMReview = "{SIAM} Rev." }
+ @String{SIAMSciStat = "{SIAM} Journal on Scientific and Statistical
+     Computing" }
+ @String{SIAMSciStat = "{SIAM} J. Sci. Statist. Comput." }
+
+ @String{SoftPracExp = "Software Practice and Experience" }
+ @String{SoftPracExp = "Software Prac. Experience" } % didn't find in AMS MR
+ @String{StatScience = "Statistical Science" }
+ @String{StatScience = "Statist. Sci." }
+ @String{Techno = "Technometrics" }
+ @String{USSRCompMathPhys = "{USSR} Computational Mathematics and Mathematical
+     Physics" }
+ @String{USSRCompMathPhys = "{U. S. S. R.} Comput. Math. and Math. Phys." }
+ @String{VLSICompSys = "Journal of {VLSI} and Computer Systems" }
+ @String{VLSICompSys = "J. {VLSI} Comput. Syst." }
+ @String{ZAngewMathMech = "Zeitschrift fur Angewandte Mathematik und
+     Mechanik" }
+ @String{ZAngewMathMech = "Z. Angew. Math. Mech." }
+ @String{ZAngewMathPhys = "Zeitschrift fur Angewandte Mathematik und Physik" }
+ @String{ZAngewMathPhys = "Z. Angew. Math. Phys." }
+
+% Publishers % ================================================= |
+
+ @String{Academic = "Academic Press" }
+ @String{ACMPress = "{ACM} Press" }
+ @String{AdamHilger = "Adam Hilger" }
+ @String{AddisonWesley = "Addison-Wesley" }
+ @String{AllynBacon = "Allyn and Bacon" }
+ @String{AMS = "American Mathematical Society" }
+ @String{Birkhauser = "Birkha{\"u}ser" }
+ @String{CambridgePress = "Cambridge University Press" }
+ @String{Chelsea = "Chelsea" }
+ @String{ClaredonPress = "Claredon Press" }
+ @String{DoverPub = "Dover Publications" }
+ @String{Eyolles = "Eyolles" }
+ @String{HoltRinehartWinston = "Holt, Rinehart and Winston" }
+ @String{Interscience = "Interscience" }
+ @String{JohnsHopkinsPress = "The Johns Hopkins University Press" }
+ @String{JohnWileySons = "John Wiley and Sons" }
+ @String{Macmillan = "Macmillan" }
+ @String{MathWorks = "The Math Works Inc." }
+ @String{McGrawHill = "McGraw-Hill" }
+ @String{NatBurStd = "National Bureau of Standards" }
+ @String{NorthHolland = "North-Holland" }
+ @String{OxfordPress = "Oxford University Press" }  %address Oxford or London?
+ @String{PergamonPress = "Pergamon Press" }
+ @String{PlenumPress = "Plenum Press" }
+ @String{PrenticeHall = "Prentice-Hall" }
+ @String{SIAMPub = "{SIAM} Publications" }
+ @String{Springer = "Springer-Verlag" }
+ @String{TexasPress = "University of Texas Press" }
+ @String{VanNostrand = "Van Nostrand" }
+ @String{WHFreeman = "W. H. Freeman and Co." }
+
+%Entries
+@article{wgp:review1,
+title={Kernel-based whole-genome prediction of complex traits: a review},
+author={Morota, Gota and Gianola, Daniel},
+journal={Frontiers in genetics},
+volume={5},
+pages={363},
+year={2014},
+publisher={Frontiers}
+}
+	      
+@article{WGP:GMatrix1,
+title={Efficient methods to compute genomic predictions},
+author={VanRaden, Paul M},
+journal={Journal of dairy science},
+volume={91},
+number={11},
+pages={4414--4423},
+year={2008},
+publisher={Elsevier}}
+		
+@article {WGP:Gustavo,
+author = {de los Campos, Gustavo and Hickey, John M. and Pong-Wong, Ricardo and Daetwyler, Hans D. and Calus, Mario P. L.},
+title = {Whole-Genome Regression and Prediction Methods Applied to Plant and Animal Breeding},
+volume = {193},
+number = {2},
+pages = {327--345},
+year = {2013},
+doi = {10.1534/genetics.112.143313},
+publisher = {Genetics},
+abstract = {Genomic-enabled prediction is becoming increasingly important in animal and plant breeding and is also receiving attention in human genetics. Deriving accurate predictions of complex traits requires implementing whole-genome regression (WGR) models where phenotypes are regressed on thousands of markers concurrently. Methods exist that allow implementing these large-p with small-n regressions, and genome-enabled selection (GS) is being implemented in several plant and animal breeding programs. The list of available methods is long, and the relationships between them have not been fully addressed. In this article we provide an overview of available methods for implementing parametric WGR models, discuss selected topics that emerge in applications, and present a general discussion of lessons learned from simulation and empirical data analysis in the last decade.},
+issn = {0016-6731},
+URL = {http://www.genetics.org/content/193/2/327},
+eprint = {http://www.genetics.org/content/193/2/327.full.pdf},
+journal = {Genetics}
+}
+
+@article{WGP:Zhang,
+author = {Zhang, Zhe AND Ober, Ulrike AND Erbe, Malena AND Zhang, Hao AND Gao, Ning AND He, Jinlong AND Li, Jiaqi AND Simianer, Henner},
+journal = {PLOS ONE},
+publisher = {Public Library of Science},
+title = {Improving the Accuracy of Whole Genome Prediction for Complex Traits Using the Results of Genome Wide Association Studies},
+year = {2014},
+month = {03},
+volume = {9},
+url = {https://doi.org/10.1371/journal.pone.0093017},
+pages = {1-12},
+abstract = {Utilizing the whole genomic variation of complex traits to predict the yet-to-be observed phenotypes or unobserved genetic values via whole genome prediction (WGP) and to infer the underlying genetic architecture via genome wide association study (GWAS) is an interesting and fast developing area in the context of human disease studies as well as in animal and plant breeding. Though thousands of significant loci for several species were detected via GWAS in the past decade, they were not used directly to improve WGP due to lack of proper models. Here, we propose a generalized way of building trait-specific genomic relationship matrices which can exploit GWAS results in WGP via a best linear unbiased prediction (BLUP) model for which we suggest the name BLUP|GA. Results from two illustrative examples show that using already existing GWAS results from public databases in BLUP|GA improved the accuracy of WGP for two out of the three model traits in a dairy cattle data set, and for nine out of the 11 traits in a rice diversity data set, compared to the reference methods GBLUP and BayesB. While BLUP|GA outperforms BayesB, its required computing time is comparable to GBLUP. Further simulation results suggest that accounting for publicly available GWAS results is potentially more useful for WGP utilizing smaller data sets and/or traits of low heritability, depending on the genetic architecture of the trait under consideration. To our knowledge, this is the first study incorporating public GWAS results formally into the standard GBLUP model and we think that the BLUP|GA approach deserves further investigations in animal breeding, plant breeding as well as human genetics.},
+number = {3},
+doi = {10.1371/journal.pone.0093017}
+}
+
+@article{GCTA,
+  title={GCTA: a tool for genome-wide complex trait analysis},
+  author={Yang, Jian and Lee, S Hong and Goddard, Michael E and Visscher, Peter M},
+  journal={The American Journal of Human Genetics},
+  volume={88},
+  number={1},
+  pages={76--82},
+  year={2011},
+  publisher={Elsevier}
+}
+
+@article{GWA:MDR,
+title = "A flexible computational framework for detecting, characterizing, and interpreting statistical patterns of epistasis in genetic studies of human disease susceptibility ",
+journal = "Journal of Theoretical Biology ",
+volume = "241",
+number = "2",
+pages = "252 - 261",
+year = "2006",
+note = "",
+issn = "0022-5193",
+doi = "https://doi.org/10.1016/j.jtbi.2005.11.036",
+url = "http://www.sciencedirect.com/science/article/pii/S0022519305005217",
+author = "Jason H. Moore and Joshua C. Gilbert and Chia-Ti Tsai and Fu-Tien Chiang and Todd Holden and Nate Barney and Bill C. White",
+keywords = "Gene–gene interactions",
+keywords = "Constructive induction",
+keywords = "Multifactor dimensionality reduction",
+keywords = "Entropy",
+keywords = "Machine learning",
+keywords = "Data mining ",
+abstract = "Detecting, characterizing, and interpreting gene–gene interactions or epistasis in studies of human disease susceptibility is both a mathematical and a computational challenge. To address this problem, we have previously developed a multifactor dimensionality reduction (MDR) method for collapsing high-dimensional genetic data into a single dimension (i.e. constructive induction) thus permitting interactions to be detected in relatively small sample sizes. In this paper, we describe a comprehensive and flexible framework for detecting and interpreting gene–gene interactions that utilizes advances in information theory for selecting interesting single-nucleotide polymorphisms (SNPs), \{MDR\} for constructive induction, machine learning methods for classification, and finally graphical models for interpretation. We illustrate the usefulness of this strategy using artificial datasets simulated from several different two-locus and three-locus epistasis models. We show that the accuracy, sensitivity, specificity, and precision of a naïve Bayes classifier are significantly improved when \{SNPs\} are selected based on their information gain (i.e. class entropy removed) and reduced to a single attribute using MDR. We then apply this strategy to detecting, characterizing, and interpreting epistatic models in a genetic study ( n = 5 0 0 ) of atrial fibrillation and show that both classification and model interpretation are significantly improved. "
+}
+
+@article{GWA:GMDR,
+title={A generalized combinatorial approach for detecting gene-by-gene and gene-by-environment interactions with application to nicotine dependence},
+author={Lou, Xiang-Yang and Chen, Guo-Bo and Yan, Lei and Ma, Jennie Z and Zhu, Jun and Elston, Robert C and Li, Ming D},
+journal={The American Journal of Human Genetics},
+volume=80,
+number=6,
+pages={1125--1137},
+year=2007,
+publisher={Elsevier}
+}
+		
+@article{LD:Intro1,
+title={Linkage disequilibrium in the human genome},
+author={Reich, David E and Cargill, Michele and Bolk, Stacey and Ireland, James and Sabeti, Pardis C and Richter, Daniel J and Lavery, Thomas and Kouyoumjian, Rose and Farhadian, Shelli F and Ward, Ryk and others},
+journal={Nature},
+volume=411,
+number=6834,
+pages={199--204},
+year=2001,
+publisher={Nature Publishing Group}
+}
+
+@article{LD:Haploview,
+title={Haploview: analysis and visualization of LD and haplotype maps},
+author={Barrett, Jeffrey C and Fry, B and Maller, JDMJ and Daly, Mark J},
+journal={Bioinformatics},
+volume={21},
+number={2},
+pages={263--265},
+year={2005},
+publisher={Oxford Univ Press}
+}
+
+@article{PK:Plink2},
+title={Second-generation PLINK: rising to the challenge of larger and richer datasets},
+author={Chang, Christopher C and Chow, Carson C and Tellier, Laurent CAM and Vattikuti, Shashaank and Purcell, Shaun M and Lee, James J},
+journal={Gigascience},
+volume=4,
+number=1,
+pages=7,
+year=2015,
+publisher={BioMed Central}
+}
+		
+@article {DL:Intro1,
+author = {Hinton, G. E. and Salakhutdinov, R. R.},
+title = {Reducing the Dimensionality of Data with Neural Networks},
+volume = 313,
+number = 5786,
+pages = {504--507},
+year = 2006,
+doi = {10.1126/science.1127647},
+publisher = {American Association for the Advancement of Science},
+abstract = {High-dimensional data can be converted to low-dimensional codes by training a multilayer neural network with a small central layer to reconstruct high-dimensional input vectors. Gradient descent can be used for fine-tuning the weights in such {\textquotedblleft}autoencoder{\textquotedblright} networks, but this works well only if the initial weights are close to a good solution. We describe an effective way of initializing the weights that allows deep autoencoder networks to learn low-dimensional codes that work much better than principal components analysis as a tool to reduce the dimensionality of data.},
+issn = {0036-8075},
+URL = {http://science.sciencemag.org/content/313/5786/504},
+eprint = {http://science.sciencemag.org/content/313/5786/504.full.pdf},
+journal = {Science}
+}
+
+@incollection{DL:Intro2,
+title = {ImageNet Classification with Deep Convolutional Neural Networks},
+author = {Alex Krizhevsky and Sutskever, Ilya and Hinton, Geoffrey E},
+booktitle = {Advances in Neural Information Processing Systems 25},
+editor = {F. Pereira and C. J. C. Burges and L. Bottou and K. Q. Weinberger},
+pages = {1097--1105},
+year = {2012},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf}
+}
+
+@InProceedings{DL:Intro3,
+author = {Szegedy, Christian and Liu, Wei and Jia, Yangqing and Sermanet, Pierre and Reed, Scott and Anguelov, Dragomir and Erhan, Dumitru and Vanhoucke, Vincent and Rabinovich, Andrew},
+title = {Going Deeper With Convolutions},
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = 2015
+} 
+
+@inproceedings{DL:DSN1,
+title={Deeply-Supervised Nets.},
+author={Lee, Chen-Yu and Xie, Saining and Gallagher, Patrick W and Zhang, Zhengyou and Tu, Zhuowen},
+year={2015}
+}
+
+@InProceedings{DL:DRL1,
+author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+title = {Deep Residual Learning for Image Recognition},
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = 2016
+}
+
+@inproceedings{DL:SWP1,
+title={Swapout: Learning an ensemble of deep architectures},
+author={Singh, Saurabh and Hoiem, Derek and Forsyth, David},
+booktitle={Advances in Neural Information Processing Systems},
+pages={28--36},
+year={2016}
+}
+
+@inproceedings{DL:Relu1,
+title={Deep Sparse Rectifier Neural Networks.},
+author={Glorot, Xavier and Bordes, Antoine and Bengio, Yoshua},
+booktitle={Aistats},
+volume=15,
+number=106,
+pages=275,
+year=2011
+}
+
+@article{DL:DRP1,
+author= {Geoffrey E. Hinton and
+ Nitish Srivastava and
+ Alex Krizhevsky and
+ Ilya Sutskever and
+ Ruslan Salakhutdinov},
+title = {Improving neural networks by preventing co-adaptation of feature detectors},
+journal = {CoRR},
+volume= {abs/1207.0580},
+year= {2012},
+url = {http://arxiv.org/abs/1207.0580},
+timestamp = {Wed, 10 Oct 2012 21:28:53 +0200},
+biburl= {http://dblp.uni-trier.de/rec/bib/journals/corr/abs-1207-0580},
+bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@inproceedings{DL:Relu2,
+title={Delving deep into rectifiers: Surpassing human-level performance on imagenet classification},
+author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+booktitle={Proceedings of the IEEE international conference on computer vision},
+pages={1026--1034},
+year=2015
+}
+
+@article{DL:SDA1,
+author = {Vincent, Pascal and Larochelle, Hugo and Lajoie, Isabelle and Bengio, Yoshua and Manzagol, Pierre-Antoine},
+title = {Stacked Denoising Autoencoders: Learning Useful Representations in a Deep Network with a Local Denoising Criterion},
+journal = {J. Mach. Learn. Res.},
+issue_date = {3/1/2010},
+volume = {11},
+month = dec,
+year = {2010},
+issn = {1532-4435},
+pages = {3371--3408},
+numpages = {38},
+url = {http://dl.acm.org/citation.cfm?id=1756006.1953039},
+acmid = {1953039},
+publisher = {JMLR.org},
+}
+
+@article{Data:UK_Biobank,
+author = {Sudlow, Cathie AND Gallacher, John AND Allen, Naomi AND Beral, Valerie AND Burton, Paul AND Danesh, John AND Downey, Paul AND Elliott, Paul AND Green, Jane AND Landray, Martin AND Liu, Bette AND Matthews, Paul AND Ong, Giok AND Pell, Jill AND Silman, Alan AND Young, Alan AND Sprosen, Tim AND Peakman, Tim AND Collins, Rory},
+journal = {PLOS Medicine},
+publisher = {Public Library of Science},
+title = {UK Biobank: An Open Access Resource for Identifying the Causes of a Wide Range of Complex Diseases of Middle and Old Age},
+year = {2015},
+month = {03},
+volume = {12},
+url = {https://doi.org/10.1371/journal.pmed.1001779},
+pages = {1-10},
+abstract = {Cathie Sudlow and colleagues describe the UK Biobank, a large population-based prospective study, established to allow investigation of the genetic and non-genetic determinants of the diseases of middle and old age.},
+number = {3},
+doi = {10.1371/journal.pmed.1001779}
+}
+
+@Article{Data:1K_Genome,
+author={SivaNayanah},
+title={1000 Genomes project},
+journal={Nat Biotech},
+year={2008},
+month={Mar},
+publisher={Nature Publishing Group},
+volume={26},
+number={3},
+pages={256-256},
+issn={1087-0156},
+doi={10.1038/nbt0308-256b},
+url={http://dx.doi.org/10.1038/nbt0308-256b}
+}
+
+@article{NGS1,
+title={The impact of next-generation sequencing technology on genetics},
+author={Mardis, Elaine R},
+journal={Trends in genetics},
+volume={24},
+number={3},
+pages={133--141},
+year={2008},
+publisher={Elsevier}}
