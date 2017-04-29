@@ -1,7 +1,7 @@
 import theano
-from hlp import S
-from bas import Base
-from snp import Snap
+from xnnt.hlp import S
+from xnnt.tnr.bas import Base
+from xnnt.tnr.snp import Snap
 
 FX = theano.config.floatX
 
@@ -71,7 +71,7 @@ class Bold(Snap, Base):
         hlt = hlt and c['ep'] - m['ep'] > self.hvp
         if hlt:
             # restore the state with lowest validation error.
-            self.snap('meov', 'r')
-            self.hlt = 2  # increased validation error.
+            self.snap('meov', 'r', crop_hist=False)
+            self.hlt = 3  # increased validation error.
             return True
         return super(Bold, self).__stop__()

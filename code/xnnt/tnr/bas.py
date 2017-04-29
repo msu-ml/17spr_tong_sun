@@ -1,9 +1,10 @@
 import numpy as np
 import theano
 from theano import function as F, tensor as T
+from theano.tensor.shared_randomstreams import RandomStreams
 from time import time as tm
-import exb
-from hlp import C, S, parms
+from xnnt import exb
+from xnnt.hlp import C, S, parms
 import sys
 
 
@@ -14,10 +15,10 @@ class Base(object):
     """
     Class for neural network training.
     """
-    def __init__(self, nnt, x=None, y=None, u=None, v=None, *arg, **kwd):
+    def __init__(self, nwk, x=None, y=None, u=None, v=None, *arg, **kwd):
         """
         : -------- parameters -------- :
-        nnt: an expression builder for the neural network to be trained,
+        nwk: an expression builder for the neural network to be trained,
         could be a Nnt object.
 
         x: the inputs, with the first dimension standing for sample units.
@@ -35,9 +36,10 @@ class Base(object):
         ** bsz: batch size.
         ** lrt: learning rate.
         ** lmb: weight decay factor, the lambda
+        ** dpc: dot product cap, preventing numerical explosion
 
         ** err: expression builder for the computation of training error
-        between the network output {yhat} and the label {y}. the expression
+        between the network output {pred} and the label {y}. the expression
         must evaluate to a scalar.
 
         ** reg: expression builder for the computation of weight panalize
@@ -52,8 +54,6 @@ class Base(object):
         # numpy random number generator
         seed = kwd.pop('seed', None)
         nrng = kwd.pop('nrng', np.random.RandomState(seed))
-
-        from theano.tensor.shared_randomstreams import RandomStreams
         trng = kwd.pop('trng', RandomStreams(nrng.randint(0x7FFFFFFF)))
 
         # private members
@@ -75,11 +75,12 @@ class Base(object):
         self.hte = kwd.get('hte', 1e-3)  # 1. low training error
         self.hgd = kwd.get('htg', 1e-7)  # 2. low gradient
         self.hlr = kwd.get('hlr', 1e-7)  # 3. low learning rate
-        self.hvp = kwd.get('hvp', 0100)  # 4. out of validation patients
+        self.hvp = kwd.get('hvp', 100)  # 4. out of validation patients
         self.hlt = 0
 
         # current epoch index, use int64
-        self.ep = S(0, 'EP')
+        ep = kwd.get('ep', 0)
+        self.ep = S(ep, 'EP')
 
         # training batch ppsize, use int64
         bsz = kwd.get('bsz', 20)
@@ -94,8 +95,8 @@ class Base(object):
 
         # learning rate
         lrt = kwd.get('lrt', 0.01)  # learning rate
-        acc = kwd.get('acc', 1.04)  # acceleration
-        dec = kwd.get('dec', 0.85)  # deceleration
+        acc = kwd.get('acc', 1.02)  # acceleration
+        dec = kwd.get('dec', 0.95)  # deceleration
         self.lrt = S(lrt, 'LRT', 'f')
         self.acc = S(acc, 'ACC', 'f')
         self.dec = S(dec, 'DEC', 'f')
@@ -105,29 +106,33 @@ class Base(object):
         self.lmd = S(lmd, 'LMD', 'f')
 
         # the neural network
-        self.nnt = nnt
-        self.dim = (nnt.dim[0], nnt.dim[-1])
+        self.nwk = nwk
 
         # inputs and labels, for modeling and validation
-        x = S(np.zeros((bsz * 2, self.dim[0]), 'f') if x is None else x)
+        x = S(np.zeros((bsz * 2, nwk.dim[0]), 'f') if x is None else x)
         y = x if y is None else S(y)
         u = x if u is None else S(u)
-        v = u if v is None else S(v)
+        v = y if v is None else S(v)
         self.x, self.y, self.u, self.v = x, y, u, v
 
         # -------- construct trainer function -------- *
         # 1) symbolic expressions
         x = T.tensor(name='x', dtype=x.dtype, broadcastable=x.broadcastable)
         y = T.tensor(name='y', dtype=y.dtype, broadcastable=y.broadcastable)
-        yhat = nnt(x)
-
         u = T.tensor(name='u', dtype=u.dtype, broadcastable=u.broadcastable)
         v = T.tensor(name='v', dtype=v.dtype, broadcastable=v.broadcastable)
 
-        # list of symbolic parameters to be tuned
-        pars = parms(yhat)
+        # prediction
+        pred = nwk(x)           # generic
 
-        # list of  symbolic weights to apply decay
+        # mean correlation between testing outcome {v} and that predicted
+        # from testing input {u}.
+        vcor = exb.mcr(nwk(x), y)
+        
+        # list of symbolic parameters to be tuned
+        pars = parms(pred)
+
+        # unlist symbolic weights into a vector
         vwgt = T.concatenate([p.flatten() for p in pars if p.name == 'w'])
 
         # symbolic batch cost, which is the mean trainning erro over all
@@ -138,7 +143,7 @@ class Base(object):
         # e.g. voxels in an MRI region, and SNPs in a gene.
         # The objective function, err, returns a scalar of training loss, it
         # can be the L1, L2 norm and CE.
-        erro = err(yhat, y).mean()
+        erro = err(pred, y).mean()
 
         # the sum of weights calculated for weight decay.
         wsum = reg(vwgt)
@@ -146,7 +151,8 @@ class Base(object):
 
         # symbolic gradient of cost WRT parameters
         grad = T.grad(cost, pars)
-        gabs = T.concatenate([T.abs_(g.flatten()) for g in grad])
+        gvec = T.concatenate([g.flatten() for g in grad])
+        gabs = T.abs_(gvec)
         gsup = T.max(gabs)
 
         # trainer control
@@ -201,6 +207,7 @@ class Base(object):
         # weights, and parameters
         self.wsum = F([], wsum, name="wsum")
         self.gsup = F([], gsup, name="gsup", givens=dts)
+
         # * -------- done with trainer functions -------- *
 
         # * -------- validation functions -------- *
@@ -211,9 +218,11 @@ class Base(object):
         else:
             vts = {x: self.u, y: self.v}
         self.verr = F([], erro, name="verr", givens=vts)
+        # validation correlation performance
+        self.vcor = F([], vcor, name="vcor", givens=vts)
 
         # * ---------- logging and recording ---------- *
-        hd, skip = [], ['step']
+        hd, skip = [], ['step', 'gvec']
         for k, v in vars(self).items():
             if k.startswith('__') or k in skip:
                 continue
@@ -238,22 +247,21 @@ class Base(object):
 
         # printing format
         self.__pfmt__ = (
-            '{ep:04d}: {tcst:.1e} = {terr:.1e} + {lmd:.1e}*{wsum:.1f}'
-            '|{verr:.1e}, {gsup:.2e}, {lrt:.2e}, {hte:.1e}')
+            '{ep:04d}: {tcst:.1e} = {terr:.1e} + {lmd:.1e}*{wsum:.1e}'
+            '|{verr:.1e}, {gsup:.2e}, {vcor:.2e}, {lrt:.2e}')
 
     # -------- helper funtions -------- *
     def nbat(self):
         return self.x.get_value().shape[-2] // self.bsz.get_value()
 
-    def yhat(self, x=None, evl=True):
+    def pred(self, input=None, evl=True):
         """
-        Predicted outcome given input {x}. By default, use the training samples
-        as input.
-        x: network input
+        Predicted outcome given {input}. By default, use the training samples.
+        input: network input
         evl: evaludate the expression (default = True)
         """
-        yhat = self.nnt(self.x if x is None else x)
-        return yhat.eval() if evl else yhat
+        hat = self.nwk(self.x if input is None else input)
+        return hat.eval() if evl else hat
 
     def __rpt__(self):
         """ report current status. """
@@ -411,7 +419,7 @@ class Base(object):
             rc1 = rc
 
         # numpy types from python native types
-        tp = {float: 'f4', int: 'i4'}
+        tp = {float: 'f4', int: 'i4', bool: 'b'}
         tp = np.dtype([(k, tp[type(v)]) for k, v in h0.items() if fc1(k)])
 
         # numpy data

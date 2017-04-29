@@ -184,3 +184,8 @@ TSWLatexianTemp*
 
 # python temporary
 *.pyc
+
+# links, and temporary directories
+bmrk
+code/bmrk.sh
+data/W09

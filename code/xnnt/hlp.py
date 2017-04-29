@@ -91,12 +91,25 @@ def parms(y, chk=None):
     d = OrderedDict()
     q = [y]
     while len(q) > 0:
+        # pop out the last symbol v
         v = q.pop()
+
+        # push in its parent operants
         q.extend(v.get_parents())
+
+        # record v if it is a variable (not an operation or apply)
+        # and it passes the checking.
         if chk(v):
             d[v] = v
 
     return list(d.keys())
+
+
+def dotps(y):
+    """ find out dot products among the computation path of {y}. """
+    def isdot(e):
+        return type(e) is T.TensorVariable and str(e).startswith('dot')
+    return parms(y, isdot)
 
 
 def wrg(nnt):

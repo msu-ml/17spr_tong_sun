@@ -1,23 +1,23 @@
 from copy import deepcopy
-from hlp import paint
-from theano. tensor.sharedvar import TensorSharedVariable as TSV
+from xnnt.hlp import paint
+from theano.tensor.sharedvar import TensorSharedVariable as TSV
 
 
 class Snap(object):
     """
     The component class to enable snap shot for neural network trainers.
     This class must be subclassed along with a Trainer class, to ensure
-    the class member 'ep', 'nnt', and the trainer core method 'step' do
+    the class member 'ep', 'nwk', and the trainer core method 'step' do
     exists.
     """
-    __skip__ = ['nnt', '__snap__', '__hist__']
+    __skip__ = ['nwk', '__snap__', '__hist__']
 
     def __init__(self, *arg, **kwd):
         """ Constructor for class Snap. """
         self.__snap__ = {}      # map of snap shots
         super(Snap, self).__init__(*arg, **kwd)
 
-    def __shot__(self, key=None):
+    def __shot__(self, key=None, **kwd):
         """ take a snap shot. """
         key = -1 if key is None else key
         if '__hist__' in vars(self) and len(self.__hist__) > 0:
@@ -33,11 +33,11 @@ class Snap(object):
             else:
                 ret[k] = deepcopy(v)
         # ret.update(self.__hist__[-1])
-        ret['nnt'] = paint(self.nnt)
+        ret['nwk'] = paint(self.nwk)
         self.__snap__[key] = ret
         return ret
 
-    def __rest__(self, key=None):
+    def __rest__(self, key=None, **kwd):
         """ restore a snap shot. """
         key = -1 if key is None else key
         ret, skp = self.__snap__[key], Snap.__skip__
@@ -48,19 +48,19 @@ class Snap(object):
                 v.set_value(ret[k])
             else:
                 v = ret[k]
-        paint(ret['nnt'], self.nnt)
+        paint(ret['nwk'], self.nwk)
 
         # remove history after the snap shot
-        if '__hist__' in vars(self):
+        if '__hist__' in vars(self) and kwd.get('crop_hist', True):
             ep = ret['ep'].item()
             del self.__hist__[ep + 1:]
         return ret
 
-    def __list__(self, key=None):
+    def __list__(self, key=None, **kwd):
         """ list snap shots. """
         return self.__snap__.get(key) if key else self.__snap__
 
-    def snap(self, key=None, act='l'):
+    def snap(self, key=None, act='l', **kwd):
         """ List, take, or restore snap shot.
         key: key to identify the snap shot.
         act: the action to take --
@@ -76,5 +76,5 @@ class Snap(object):
         """
         return {'l': self.__list__, 0: self.__list__,
                 's': self.__shot__, 1: self.__shot__,
-                'r': self.__rest__, 2: self.__rest__}[act](key)
+                'r': self.__rest__, 2: self.__rest__}[act](key, **kwd)
         

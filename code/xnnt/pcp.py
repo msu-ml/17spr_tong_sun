@@ -1,12 +1,7 @@
 import numpy as np
-try:
-    from .hlp import S, C
-    from .nnt import Nnt
-    import exb
-except ValueError:
-    from hlp import S, C
-    from nnt import Nnt
-    import exb
+from xnnt.hlp import S, C
+from xnnt.nnt import Nnt
+from xnnt import exb
 from theano import tensor as T
 from theano import scan as sc
 
@@ -69,11 +64,11 @@ class Pcp(Nnt):
         cat = kwd.get('cat', 2)
 
         if w is None:
-            if s in ['softplus', 'relu']:
+            if s in ['softplus', 'relu', 'sftp']:
                 print('Initalize w for', s)
                 w = self.__nrng__.normal(
                     0, np.sqrt(1.0/dim[0] + 1.0/dim[1]), dim)
-            elif s == 'sigmoid':
+            elif s in ['sigmoid', 'elliot', 'logistic']:
                 print('Initalize w for', s)
                 w = self.__nrng__.uniform(
                     low=-4 * np.sqrt(6. / (dim[0] + dim[1])),
@@ -105,15 +100,29 @@ class Pcp(Nnt):
                 c = np.zeros(dim[1])
             c = S(c, 'c')
 
-        # shape of the activation function.
-        shp = kwd.get('shp', None)
-        if shp is not None:
-            shp = S(shp, 'Shp', 'f')
+        # shape parameters
+        self.alpha = None
+        self.beta = None
+        self.gamma = None
+
+        # flexible shape of the activation function.
+        for shp in ('alpha', 'beta', 'gamma'):
+            v = kwd.get(shp, None)
+            if v is None:
+                continue
+            vars(self)[shp] = S(v, shp, 'f4')
+
+        # constant shape parameters
+        for shp in ('Alpha', 'Beta', 'Gamma'):
+            v = kwd.get(shp, None)
+            if v is None:
+                continue
+            shp = shp.lower()
+            vars(self)[shp] = C(v, shp, 'f4')
 
         self.w = w            # weight matrix
         self.b = b            # offset on output (bias of the hidden)
         self.c = c            # offset on bottom (bias of the visible)
-        self.shp = shp        # shape
         self.lvl = lvl        # output level
         self.cat = cat        # output categorys
 
@@ -150,8 +159,8 @@ class Pcp(Nnt):
                 self.bar = bar
 
             # apply shape, larger means steeper
-            if self.shp is not None:
-                _ = _ * self.shp
+            if self.alpha is not None:
+                _ = _ * self.alpha
 
             # activation
             _ = exb.sigmoid(_)
@@ -160,12 +169,15 @@ class Pcp(Nnt):
             if self.lvl > 2:
                 _ = T.sum(_, 0) / C(self.lvl - 1, 'f', 'L-1')
 
+        if self.s == 'elliot':
+            _ = exb.elliot(_, self.alpha)
+
+        if self.s == 'logistic':
+            _ = exb.logistic(_, self.alpha, self.beta)
+
         # softplus activation
-        if self.s == 'softplus':
-            if self.shp is not None:
-                _ = exb.softplus(_ * self.shp) / self.shp
-            else:
-                _ = exb.softplus(_)
+        if self.s in ['softplus', 'sftp']:
+            _ = exb.sftp(_, self.alpha, self.beta)
 
         # softmax
         if self.s == 'softmax':
@@ -175,7 +187,8 @@ class Pcp(Nnt):
 
         # relu activation
         if self.s == 'relu':
-            _ = exb.relu(_, self.shp)
+            _ = exb.relu(_, self.alpha)
+            _.name = 'relu(Xw+b)'
             
         return _
 

@@ -1,6 +1,6 @@
 import theano
-from bdr import Bold
-from hlp import S
+from xnnt.tnr.bdr import Bold
+from xnnt.hlp import S
 
 FX = theano.config.floatX
 
